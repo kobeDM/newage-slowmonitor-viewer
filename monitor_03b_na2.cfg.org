@@ -1,0 +1,35 @@
+detector NEWAGE-0.3b
+status_home /home/msgc/status_na2 
+rate_home /home/msgc/rate
+#canvas size
+canvas 1200 900
+#pad division row column
+divide 4 4
+#time range for updating in sec
+t_range_update 7200
+#pad name unit fileID column slope[value/V] offset[V] min[value] max[value] lower_limit[value] upper_limit[value] log color 
+## pads 1 and final are reserved
+## give -1 for fileID to read YYYYMMDD 
+## give x for fileID to read YYYYMMDD_x 
+2 rate_real Hz -1 2 1 0 0 30 0 20 0 4
+2 rate_live Hz -1 3 1 0 0 30 0 20 0 2
+3 rate_real_log Hz -1 2 1 0 0.1 100 1 20 1 4
+3 rate_live_log Hz -1 3 1 0 0.1 100 1 20 1 2
+4 disk_free GB -1 4 0.000976 0 0 500 50 2000 0 4
+5 anode_V V 1 2 1000 0 450 550 500 530  0 4
+6 anode_I nA 1 3 100 0 0 10 0 3 0 4
+7 drift_V kV 1 4 -10 0 3.5 4.5 3.6 4.0  0 4
+8 drift_I uA 1 5 100 0 15 30 20 25 0 4
+#9 flow_monitor ml/min1 2 1000 0 450 550 400 600 0 4
+12 coolant_temp K 1 9 -50.14 -0.259 200 260 220 240 0 4
+#11 coolant_level K 1 8 10 0 0 100 0 100 0 4
+#12 room_temp C 1 8 100 2.73 0 50 0 50  0 4
+9 pressure torr 1 6 -13.85 0.05 60 100 75 90 0 4
+13 T_outside C 2 2 1000 .274 25 40 26 38  0 2
+13 T_fanA C 2 3 1000 .275 25 40 26 38  0 8
+13 T_fanB C 2 4 1000 .2705 25 40 26 38  0 4
+13 T_room C 2 5 1000 .274 25 40 26 38  0 6
+14 T_anode_BOX C 2 7 1000 .2715 25 40 26 38  0 2
+14 T_cathode_BOX C 2 8 1000 .274 25 40 26 38  0 8
+14 T_NIMbin C 2 9 1000 .272 25 40 26 38  0 4
+14 T_chamber C 2 10 1000 .274 25 40 26 38  0 6
