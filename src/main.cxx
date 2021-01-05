@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <vector>
@@ -82,6 +81,9 @@ int main(int argc, char *argv[]){
   int rate_sw[MAXCH]={0}; // rate switch
   int CAEN_sw[MAXCH]={0}; // CAEN switch
   int ups_sw[MAXCH]={0}; // ups switch
+  int vnum;
+  double valueV[MAXCH];  // values
+
   double val_cals[MAXCH][8];//slope, offset, min, max, lower_imit for caution, higher_limit for caution log plot_color
   double val[MAXCH];
   int interval=INTERVAL;
@@ -415,6 +417,8 @@ int main(int argc, char *argv[]){
 	sprintf(this_file,"%s/%d",this_home,i);
       
       //      if(!(fp = popen(Form("if [ -e %s/%d ]; then echo 1; else echo 0; fi",this_home,i),"r"))){
+      for(vnum=0;vnum<MAXCH;vnum++)      valueV[vnum]=0;
+
       if(!(fp = popen(Form("if [ -e %s ]; then echo 1; else echo 0; fi",this_file),"r"))){
 	cerr<<"status file " << this_file<<"/"<<i<< " does not exit."<<endl;
       }
@@ -437,8 +441,8 @@ int main(int argc, char *argv[]){
 	  	  
 	  if(utime_s<=utime_n && utime_n<=utime_e){//fill
 	    char date[128], time[128];  
-	    double valueV[MAXCH];  
-	    int vnum=0;
+	    //	    double valueV[MAXCH];  
+	    vnum=0;
 	    while(is >> valueV[vnum]) {
 	      //	     cerr << valueV[vnum]<<" ";
 	      vnum++;
