@@ -417,8 +417,10 @@ int main(int argc, char *argv[]){
 	sprintf(this_file,"%s/%d",this_home,i);
       
       //      if(!(fp = popen(Form("if [ -e %s/%d ]; then echo 1; else echo 0; fi",this_home,i),"r"))){
-      for(vnum=0;vnum<MAXCH;vnum++)      valueV[vnum]=0;
-
+      for(vnum=0;vnum<MAXCH;vnum++){
+	valueV[vnum]=0;
+	val[vnum]=0;
+      }
       if(!(fp = popen(Form("if [ -e %s ]; then echo 1; else echo 0; fi",this_file),"r"))){
 	cerr<<"status file " << this_file<<"/"<<i<< " does not exit."<<endl;
       }
