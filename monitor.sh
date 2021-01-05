@@ -1,7 +1,8 @@
 #! /bin/sh
-VER="4.7"
+VER="4.9"
 #DIR="/home/msgc/src/monitor/"${VER}
 DIR="/home/msgc/slow_monitor/monitor/"${VER}
+WORK_DIR="/home/msgc/status_tmp"
 EXE=${DIR}"/monitor"
 #CONFIG03b="monitor_03b.cfg"
 CONFIG03b_ORG=${DIR}"/monitor_03b.cfg"
@@ -28,14 +29,15 @@ echo "monitor.sh [YYYYMMDD [hh:mm:ss]] [YYYYYMMDD [hh:mm:ss]]"
 #cp $CONFIG03a_ORG $CONFIG03a
 #fi
 #echo Edit ${CONFIG03a} and reload the monitor to change the settings.
-
+cd $WORK_DIR
 if [ -e $CONFIG03b ]; then 
 echo $CONFIG03b  exists. Using these parameters.
 else
 echo $CONFIG03b  does not exit. Cprying from ${DIR}. 
 cp $CONFIG03b_ORG $CONFIG03b
 fi
-echo Edit ${CONFIG03b} and reload the monitor to change the settings.
+#echo Edit ${CONFIG03b} and reload the monitor to change the settings.
+echo Edit ${WORK_DIR}/${CONFIG03b} and reload the monitor to change the settings.
  
 if [ $# -ge 3 ] ;then
 #xterm -exe $EXE $CONFIG03a $1 $2 $3 $4 -bg black -fg yellow -title 'long-term monitor' -geo 50x10+50+620 &
