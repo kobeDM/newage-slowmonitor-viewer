@@ -1,8 +1,9 @@
 #! /bin/sh
-VER="4.9"
+#VER="4.9"
 #DIR="/home/msgc/src/monitor/"${VER}
-DIR="/home/msgc/slow_monitor/monitor/"${VER}
-WORK_DIR="/home/msgc/status_tmp"
+#DIR="/home/msgc/slow_monitor/monitor/"${VER}
+DIR=$HOME/slow_monitor/newage-slowmonitor-viewer
+WORK_DIR=$HOME/status_tmp
 EXE=${DIR}"/monitor"
 #CONFIG03b="monitor_03b.cfg"
 CONFIG03b_ORG=${DIR}"/monitor_03b.cfg"
