@@ -480,11 +480,7 @@ int main(int argc, char *argv[]){
   //dummyborder->SetFillColor(0);
 
   char datetime[128];  double xx, yy;
-<<<<<<< HEAD
-  yy=0;
-=======
   yy=0;//initialize yy=0
->>>>>>> 587987cffa5b6dba22d9b4f8a97725b8c9cb727e
   fp = popen("date +\"%Y/%m/%d %H:%M:%S\" | tr -d '\n' ","r"); 
   fgets(datetime,sizeof(datetime),fp); pclose(fp);
   pt_info->AddText(Form("%s status monitor",detector_name));
