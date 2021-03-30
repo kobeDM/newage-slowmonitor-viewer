@@ -2,6 +2,7 @@
 DIR=$HOME/slow_monitor/newage-slowmonitor-viewer
 WORK_DIR=$HOME/status_tmp
 EXE=${DIR}"/monitor"
+AUTOSENDER=$HOME/bin/autosender.sh
 
 CONFIG_SKELTON="monitor_skelton.cfg"
 CONFIG_SKELTON_ORG=${DIR}"/monitor_skelton.cfg"
@@ -20,7 +21,7 @@ CONFIG=$CONFIG03b
 CONFIG_ORG=$CONFIG03b_ORG
 
 
-echo "monitor.sh [YYYYMMDD [hh:mm:ss]] [YYYYYMMDD [hh:mm:ss]]"
+echo "SMviewer.sh [YYYYMMDD [hh:mm:ss]] [YYYYYMMDD [hh:mm:ss]]"
 
 cd $WORK_DIR
 if [ -e $CONFIG ]; then 
@@ -30,7 +31,11 @@ echo $CONFIG  does not exit. Cprying from ${DIR}.
 cp $CONFIG_ORG $CONFIG
 fi
 echo Edit ${WORK_DIR}/${CONFIG} and reload the monitor to change the settings.
- 
+
+echo "starting autosender."
+$AUTOSENDER &
+
+
 if [ $# -ge 3 ] ;then
 #xterm -exe $EXE $CONFIG03a $1 $2 $3 $4 -bg black -fg yellow -title 'long-term monitor' -geo 50x10+50+620 &
 xterm -e $EXE $CONFIG $1 $2 $3 $4 -bg black -fg yellow -title 'long-term monitor' -geo 50x10+50+50 &
