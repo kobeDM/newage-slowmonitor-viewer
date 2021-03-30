@@ -2,7 +2,8 @@
 DIR=$HOME/slow_monitor/newage-slowmonitor-viewer
 WORK_DIR=$HOME/status_tmp
 EXE=${DIR}"/monitor"
-AUTOSENDER=autosender.sh
+#AUTOSENDER=autosender.sh
+AUTOSENDER=SMsender.sh
 
 CONFIG_SKELTON="monitor_skelton.cfg"
 CONFIG_SKELTON_ORG=${DIR}"/monitor_skelton.cfg"
