@@ -2,7 +2,7 @@
 DIR=$HOME/slow_monitor/newage-slowmonitor-viewer
 WORK_DIR=$HOME/status_tmp
 EXE=${DIR}"/monitor"
-AUTOSENDER=$HOME/bin/autosender.sh
+AUTOSENDER=autosender.sh
 
 CONFIG_SKELTON="monitor_skelton.cfg"
 CONFIG_SKELTON_ORG=${DIR}"/monitor_skelton.cfg"
@@ -32,8 +32,13 @@ cp $CONFIG_ORG $CONFIG
 fi
 echo Edit ${WORK_DIR}/${CONFIG} and reload the monitor to change the settings.
 
+if [ `ps -a | grep $AUTOSENDER | wc -l ` -ge 1  ]; then
+echo $AUTOSENDER is running.
+else 
 echo "starting autosender."
-$AUTOSENDER &
+$HOME/bin/$AUTOSENDER &
+fi
+
 
 
 if [ $# -ge 3 ] ;then
