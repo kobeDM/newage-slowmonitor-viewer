@@ -19,6 +19,7 @@
 #define CANVAS_Y_DEFAULT 890
 #define PRESCALE 10
 #define DATELIMIT 100
+#define PNGOUT  "status.png"
 
 using namespace std;
 
@@ -99,7 +100,10 @@ int main(int argc, char *argv[]){
   string str_status = "";
   string str_warning = "";
   char str_tmp[128];
-  
+
+  string  st_pngout ="status.png";
+  string  st_pngout_up ="status_up.png";
+
   utime_n=time(NULL);
   tp=localtime(&utime_n);
   strftime(date_n,10,"%Y%m%d",tp);
@@ -497,7 +501,7 @@ int main(int argc, char *argv[]){
   pt_info_detail->AddText(Form("from  %s %s",date_s,time_s));
   pt_info_detail->AddText(0,0,Form(" to   %s %s",date_e,time_e));
   cerr<<"time range "<< date_s << " "<<time_s << "--"<< date_e << " "<<time_e <<endl;
-  cerr<<"monitor updated at "<<datetime<<endl;
+  // cerr<<"monitor updated at "<<datetime<<endl;
  
   //  cerr<<"making graph ok."<<endl;
 
@@ -617,7 +621,12 @@ int main(int argc, char *argv[]){
   if(update_sw){  
     plot=1;
     cc->Update();
-    cerr <<"1st plot done."<<endl;
+    //    cerr <<"Updating monitor"<<endl;
+    cerr<<"Monitor updated at "<<datetime<<endl;
+    //    cc->Print("status_up.png");
+    cc->Print(st_pngout_up.c_str());
+    //    cerr << "saved in status_up.png"<<endl;
+    //cerr << "saved in"<<st_pngout_up<<endl;
     sleep(interval);
   }
   else{
@@ -625,8 +634,10 @@ int main(int argc, char *argv[]){
     TFile *file_output = new TFile("status.root","RECREATE");
     cc->Write();
     delete file_output;
-    cc->Print("status.png");
-    cerr << "saved in status.png"<<endl;
+    //    cc->Print("status.png");
+    cerr << "One-shot monitor"<<endl;
+    cc->Print(st_pngout.c_str());
+    //    cerr << "saved in status.png"<<endl;
 
 #ifndef BGMODE
     app.Run();
