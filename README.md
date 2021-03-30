@@ -1,5 +1,4 @@
 # newage-slowmonitor-viewer
-newage slow monitor
-latest v4.9.7
+newage slow monitor viewer
 
-use　with monitor.sh
+use　with SMviewer.sh
