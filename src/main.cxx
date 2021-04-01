@@ -500,7 +500,7 @@ int main(int argc, char *argv[]){
   if(update_sw)
   pt_info_sub->AddText(Form("(updating mode, interval %d sec)",interval));
   pt_info_sub->AddText(Form("created at %s",datetime));
-  pt_info_sub->AddText(Form("by %s",hostname));
+  pt_info_sub->AddText(Form("   by %s",hostname));
   pt_info_detail->AddText(Form("config file: %s",info_file));
   pt_info_detail->AddText(Form("status data directory: %s",status_home));
   pt_info_detail->AddText(Form("rate data directory: %s",rate_home));
