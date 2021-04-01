@@ -21,7 +21,6 @@ CONFIG03b_ORG=${DIR}"/monitor_03b_na2.cfg"
 CONFIG=$CONFIG03b
 CONFIG_ORG=$CONFIG03b_ORG
 
-
 echo "SMviewer.sh [YYYYMMDD [hh:mm:ss]] [YYYYYMMDD [hh:mm:ss]]"
 
 cd $WORK_DIR
@@ -41,7 +40,13 @@ $HOME/bin/$AUTOSENDER &
 fi
 
 
-
+while getopts ":b" optkey; do
+case "$optkey" in
+b)
+echo "batch mode"
+bw=1;
+exit
+done
 if [ $# -ge 3 ] ;then
 #xterm -exe $EXE $CONFIG03a $1 $2 $3 $4 -bg black -fg yellow -title 'long-term monitor' -geo 50x10+50+620 &
 xterm -e $EXE $CONFIG $1 $2 $3 $4 -bg black -fg yellow -title 'long-term monitor' -geo 50x10+50+50 &
