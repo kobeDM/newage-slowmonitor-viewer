@@ -285,10 +285,9 @@ int main(int argc, char *argv[]){
     else if(buf_s=="t_range_update"){
       is>>buf_s;
       t_range_update=atoi(buf_s.c_str());
-      if(update_sw)
+      //      if(update_sw)
       cerr <<"time range for updating monitor: "<< t_range_update<<endl;
     }
-
 
     else if(buf_s.substr(0,1)=="#"){
       //comment
