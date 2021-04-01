@@ -484,15 +484,23 @@ int main(int argc, char *argv[]){
   //dummyborder->SetFillColor(0);
 
   char datetime[128];  double xx, yy;
+  char hostname[128];
 
   yy=0;//initialize yy=0 for null data
 
   fp = popen("date +\"%Y/%m/%d %H:%M:%S\" | tr -d '\n' ","r"); 
-  fgets(datetime,sizeof(datetime),fp); pclose(fp);
+  fgets(datetime,sizeof(datetime),fp); 
+  pclose(fp);
+  fp = popen("echo $HOSTNAME","r");
+  fgets(hostname,sizeof(hostname),fp);
+  pclose(fp);
+
+
   pt_info->AddText(Form("%s status monitor",detector_name));
   if(update_sw)
   pt_info_sub->AddText(Form("(updating mode, interval %d sec)",interval));
   pt_info_sub->AddText(Form("created at %s",datetime));
+  pt_info_sub->AddText(Form("by %s",hostname));
   pt_info_detail->AddText(Form("config file: %s",info_file));
   pt_info_detail->AddText(Form("status data directory: %s",status_home));
   pt_info_detail->AddText(Form("rate data directory: %s",rate_home));
