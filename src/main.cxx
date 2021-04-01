@@ -53,8 +53,8 @@ void SetAxisProperties(TH2D *hist){
 //}
 
 int main(int argc, char *argv[]){
-  cout<<"monitor [config_file] [start_date] [start_time] [end_date] [end_time]"<<endl;
-  cout<<"monitor [config_file] 0 (for updating)";
+  cout<<"monitor [-b] [config_file] [start_date] [start_time] [end_date] [end_time]"<<endl;
+  cout<<"monitor [-b] [config_file] 0 (for updating)";
   int i,j,id,plot,multi;
   int channels,pad;
   int padcol=PADCOL_DEFAULT;
@@ -104,6 +104,8 @@ int main(int argc, char *argv[]){
   string  st_pngout ="status.png";
   string  st_pngout_up ="status_up.png";
 
+  int opt;
+  int batch_sw=0;
   utime_n=time(NULL);
   tp=localtime(&utime_n);
   strftime(date_n,10,"%Y%m%d",tp);
@@ -146,14 +148,25 @@ int main(int argc, char *argv[]){
   //cerr<< "date_n" <<date_n<<endl;
   //cerr<< "date_e" <<date_e<<endl;
   
-  
-  if(argc>1){
-    sprintf(info_file, argv[1]);
+  while((opt=getopt(argc,argv,"b"))!=-1){
+    switch (opt){
+    case 'b':
+      cerr<<"batch mode"<<endl;
+      batch_sw=1;
+      break;
+    default:
+      break;
+    }
   }
- if(argc>2) sprintf(date_s, argv[2]);
-  if(argc>3) sprintf(time_s, argv[3]);
-  if(argc==5){ sprintf(date_e, "%d",atoi(argv[4])+1);    sprintf(time_e, "00:00:00"); }
-  if(argc>=6){ sprintf(date_e, argv[4]);    sprintf(time_e, argv[5]);    }
+  optind--;
+  cerr<< "optind="<<optind<<endl;
+  if(argc>1+optind){
+    sprintf(info_file, argv[1+optind]);
+  }
+  if(argc>2+optind) sprintf(date_s, argv[2+optind]);
+  if(argc>3+optind) sprintf(time_s, argv[3+optind]);
+  if(argc==5+optind){ sprintf(date_e, "%d",atoi(argv[4+optind])+1);    sprintf(time_e, "00:00:00"); }
+  if(argc>=6+optind){ sprintf(date_e, argv[4+optind]);    sprintf(time_e, argv[5+optind]);    }
   
 //  cerr<<"date_n:"<<date_e<<endl;
 //  cerr<<"date_s:"<<date_e<<endl;

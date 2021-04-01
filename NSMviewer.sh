@@ -39,15 +39,18 @@ echo "starting autosender."
 $HOME/bin/$AUTOSENDER &
 fi
 
-
+bs=0
 while getopts ":b" optkey; do
 case "$optkey" in
 b)
-echo "batch mode"
-bw=1;
-exit
+bs=1;
+;;
+esac
 done
-if [ $# -ge 3 ] ;then
+if [ $bs -eq 1 ]; then
+echo Batch mode is selected with configure file $CONFIG
+nohup $EXE -b $CONFIG 0 &
+elif [ $# -ge 3 ] ;then
 #xterm -exe $EXE $CONFIG03a $1 $2 $3 $4 -bg black -fg yellow -title 'long-term monitor' -geo 50x10+50+620 &
 xterm -e $EXE $CONFIG $1 $2 $3 $4 -bg black -fg yellow -title 'long-term monitor' -geo 50x10+50+50 &
 #xterm -e $EXE $CONFIGLiqCF4 $1 $2 $3 $4 -bg black -fg yellow -title 'long-term monitor' -geo 50x10+50+50 &
