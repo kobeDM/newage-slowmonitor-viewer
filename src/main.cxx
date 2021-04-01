@@ -286,7 +286,7 @@ int main(int argc, char *argv[]){
       is>>buf_s;
       t_range_update=atoi(buf_s.c_str());
       //      if(update_sw)
-      cerr <<"time range for updating monitor: "<< t_range_update<<endl;
+      cerr <<"time range for updating monitor: "<< t_range_update<<endl<<fflush;
     }
 
     else if(buf_s.substr(0,1)=="#"){
@@ -334,7 +334,6 @@ int main(int argc, char *argv[]){
       cerr << "    conversion:" << val_cals[id][0]<<"*(value[V] -" <<val_cals[id][1]<<")" << endl;
       cerr << "    y range: " << val_cals[id][2]<< " to "<< val_cals[id][3] << val_unit[id]<<endl;
       cerr << "    lower limit: " << val_cals[id][4]<< ", upper limit: "<< val_cals[id][5] << val_unit[id]<<endl;
-      
       cerr << "    plot: pad "<< val_IDs[id][1];
       if(val_cals[id][6])       cerr << " log, " ;
       else       cerr << " linear, ";
