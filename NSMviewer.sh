@@ -33,7 +33,8 @@ cp $CONFIG_ORG $CONFIG
 fi
 echo Edit ${WORK_DIR}/${CONFIG} and reload the monitor to change the settings.
 
-if [ `ps -aux | grep $AUTOSENDER | wc -l ` -ge 1  ]; then
+if [ `ps -aux | grep $AUTOSENDER | wc -l ` -gt 1  ]; then
+#if [ `ps -aux | grep $AUTOSENDER | wc -l ` -ge 1  ]; then
 #if [ `ps -a | grep sender.sh | wc -l ` -ge 1  ]; then
 echo $AUTOSENDER is running.
 else 
