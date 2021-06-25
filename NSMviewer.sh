@@ -38,8 +38,9 @@ if [ `ps -aux | grep $AUTOSENDER | wc -l ` -gt 1  ]; then
 #if [ `ps -a | grep sender.sh | wc -l ` -ge 1  ]; then
 echo $AUTOSENDER is running.
 else 
-echo "starting autosender."
-$HOME/bin/$AUTOSENDER &
+echo "Autosender not to run."
+#echo "starting autosender."
+#$HOME/bin/$AUTOSENDER &
 fi
 
 bs=0
