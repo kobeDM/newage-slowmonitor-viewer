@@ -1,12 +1,17 @@
-#include <stdlib.h>
 #include <math.h>
 #include <vector>
 #include <fstream>
+#include <string>
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include <time.h>
+#include <stdio.h>
+#include <cstdlib>
+#include <string>
 #include "Root_h.h"
-#include "main.h"
+//#include "main.h"
+
 #define MAXFILENUM 1000
 #define MAXCH 128
 #define PADCOL_DEFAULT 4
@@ -75,6 +80,7 @@ int main(int argc, char *argv[]){
   char detector_name[128],info_file[128];
   char status_home[128], rate_home[128], CAEN_status_home[128], ups_status_home[128];
   char this_home[128],this_file[128];
+  //  string this_file;
   char can_title[256];
 
   //  int info_exists;
@@ -134,16 +140,16 @@ int main(int argc, char *argv[]){
 
   //sprintf(date_s, "20151126");  
   //  sprintf(time_s, "00:00:00");  
-  sprintf(time_s, "0");  
-  sprintf(time_e, "0");  
+  sprintf(time_s, "%s","0");  
+  sprintf(time_e,  "%s","0");  
   //  sprintf(date_e, "20151127");  
   //  sprintf(time_e, "00:00:00");
-  sprintf(detector_name,"NEWAGE-0.3b");
-  sprintf(status_home,"/home/msgc/status");
-  sprintf(rate_home,"/home/msgc/rate");
-  sprintf(CAEN_status_home,"/home/msgc/CAEN_status_na16");
-  sprintf(ups_status_home,"/home/msgc/ups_status");
-  sprintf(info_file,"/home/msgc/status/monitor/4.4.1/monitor_03b.cfg");
+  sprintf(detector_name, "%s","NEWAGE-0.3b");
+  sprintf(status_home, "%s","/home/msgc/status");
+  sprintf(rate_home, "%s","/home/msgc/rate");
+  sprintf(CAEN_status_home, "%s","/home/msgc/CAEN_status_na16");
+  sprintf(ups_status_home, "%s","/home/msgc/ups_status");
+  sprintf(info_file, "%s","/home/msgc/status/monitor/4.4.1/monitor_03b.cfg");
   //  cerr<< "date_s" <<date_s<<endl;
   //cerr<< "date_n" <<date_n<<endl;
   //cerr<< "date_e" <<date_e<<endl;
@@ -161,12 +167,12 @@ int main(int argc, char *argv[]){
   optind--;
   cerr<< "optind="<<optind<<endl;
   if(argc>1+optind){
-    sprintf(info_file, argv[1+optind]);
+    sprintf(info_file, "%s",argv[1+optind]);
   }
-  if(argc>2+optind) sprintf(date_s, argv[2+optind]);
-  if(argc>3+optind) sprintf(time_s, argv[3+optind]);
+  if(argc>2+optind) sprintf(date_s,  "%s",argv[2+optind]);
+  if(argc>3+optind) sprintf(time_s,  "%s",argv[3+optind]);
   if(argc==5+optind){ sprintf(date_e, "%d",atoi(argv[4+optind])+1);    sprintf(time_e, "00:00:00"); }
-  if(argc>=6+optind){ sprintf(date_e, argv[4+optind]);    sprintf(time_e, argv[5+optind]);    }
+  if(argc>=6+optind){ sprintf(date_e,  "%s",argv[4+optind]);    sprintf(time_e,  "%s",argv[5+optind]);    }
   
 //  cerr<<"date_n:"<<date_e<<endl;
 //  cerr<<"date_s:"<<date_e<<endl;
@@ -203,7 +209,7 @@ int main(int argc, char *argv[]){
     is>>buf_s;
     if(buf_s=="detector"){
       is>>buf_s;
-      sprintf(detector_name,buf_s.c_str());
+      sprintf(detector_name, "%s",buf_s.c_str());
       cerr <<"detecor name: "<< detector_name<<endl;
     }
     else if(buf_s=="divide"){
@@ -221,8 +227,8 @@ int main(int argc, char *argv[]){
     }
   }
   // canvas declare
-  if(update_sw)  sprintf(can_title,"status monitor (updating)");
-  else  sprintf(can_title,"status monitor");
+  if(update_sw)  sprintf(can_title, "%s","status monitor (updating)");
+  else  sprintf(can_title, "%s","status monitor");
 
 
   cerr <<"canvas size:"<< canvas_x <<"*"<<canvas_y<<endl;
@@ -259,27 +265,27 @@ int main(int argc, char *argv[]){
     is>>buf_s;
     if(buf_s=="detector"){
       is>>buf_s;
-      sprintf(detector_name,buf_s.c_str());
+      sprintf(detector_name,"%s",buf_s.c_str());
       cerr <<"detecor name: "<< detector_name<<endl;
     }
     else if(buf_s=="status_home"){
       is>>buf_s;
-      sprintf(status_home,buf_s.c_str());
+      sprintf(status_home,"%s",buf_s.c_str());
       cerr <<"status_home"<< status_home<<endl;
     }
     else if(buf_s=="rate_home"){
       is>>buf_s;
-      sprintf(rate_home,buf_s.c_str());
+      sprintf(rate_home,"%s",buf_s.c_str());
       cerr <<"rate_home:"<< rate_home<<endl;
     }
     else if(buf_s=="CAEN_status_home"){
       is>>buf_s;
-      sprintf(CAEN_status_home,buf_s.c_str());
+      sprintf(CAEN_status_home,"%s",buf_s.c_str());
       cerr <<"CAEN_status_home:"<< CAEN_status_home<<endl;
     }
     else if(buf_s=="ups_status_home"){
       is>>buf_s;
-      sprintf(ups_status_home,buf_s.c_str());
+      sprintf(ups_status_home,"%s",buf_s.c_str());
       cerr <<"ups_status_home:"<< ups_status_home<<endl;
     }
     else if(buf_s=="t_range_update"){
@@ -429,8 +435,10 @@ int main(int argc, char *argv[]){
 	sprintf(this_home,"%s",status_home);
       if(val_IDs[id][2]>0&&!(rate_sw[id]))
 	sprintf(this_file,"%s/%d_%d",this_home,i,val_IDs[id][2]);
+      //snprintf(this_file,sizeof(this_file),"%s/%d_%d",this_home,i,val_IDs[id][2]);
       else
 	sprintf(this_file,"%s/%d",this_home,i);
+      //snprintf(this_file,sizeof(this_file),"%s/%d",this_home,i);
       
       //      if(!(fp = popen(Form("if [ -e %s/%d ]; then echo 1; else echo 0; fi",this_home,i),"r"))){
       for(vnum=0;vnum<MAXCH;vnum++){
