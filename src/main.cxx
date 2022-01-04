@@ -22,7 +22,8 @@
 #define COLOR_WARNING 49
 #define CANVAS_X_DEFAULT 1500
 #define CANVAS_Y_DEFAULT 890
-#define PRESCALE 10
+//#define PRESCALE 10
+#define PRESCALE 1
 #define DATELIMIT 100
 #define PNGOUT  "status.png"
 
